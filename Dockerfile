@@ -1,25 +1,24 @@
-FROM centos:7
+FROM ubuntu:latest
 
-MAINTAINER linuxtechlab
+MAINTAINER ybmsr <rameshkumar@gmail.com>
 
-LABEL Remarks="This is a dockerfile example for Centos system"
+WORKDIR /usr/apps/hello-docker/
 
-RUN yum -y update && \
+RUN apt-get -y update
 
-yum -y install httpd && \
+RUN apt-get install -y nodejs
 
-yum clean all
+RUN apt-get install -y npm
 
-COPY data/httpd.conf /etc/httpd/conf/httpd.conf
+#RUN ln -s /usr/bin/nodejs /usr/bin/node........;;;;;
 
-ADD data/html.tar.gz /var/www/html/
+RUN npm install -g http-server
 
-EXPOSE 80
+ADD . /usr/apps/hello-docker/
 
-ENV HOME /root
+ADD index.html /usr/apps/hello-docker/index.html
 
-WORKDIR /root
+CMD ["http-server", "-s"]
+© 2022 GitHub, Inc.
+Terms
 
-ENTRYPOINT ["ping"]
-
-CMD ["google.com"] 
