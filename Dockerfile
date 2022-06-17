@@ -1,3 +1,25 @@
-FROM tomcat:8
-# Take the war and copy to webapps of tomcat
-COPY target/*.war /usr/local/tomcat/webapps/dockeransible.war
+FROM centos:7
+
+MAINTAINER linuxtechlab
+
+LABEL Remarks="This is a dockerfile example for Centos system"
+
+RUN yum -y update && \
+
+yum -y install httpd && \
+
+yum clean all
+
+COPY data/httpd.conf /etc/httpd/conf/httpd.conf
+
+ADD data/html.tar.gz /var/www/html/
+
+EXPOSE 80
+
+ENV HOME /root
+
+WORKDIR /root
+
+ENTRYPOINT ["ping"]
+
+CMD ["google.com"] 
