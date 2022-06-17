@@ -1,24 +1,3 @@
-FROM ubuntu:latest
-
-MAINTAINER ybmsr <rameshkumar@gmail.com>
-
-WORKDIR /usr/apps/hello-docker/
-
-RUN apt-get -y update
-
-RUN apt-get install -y nodejs
-
-RUN apt-get install -y npm
-
-#RUN ln -s /usr/bin/nodejs /usr/bin/node........;;;;;
-
-RUN npm install -g http-server
-
-ADD . /usr/apps/hello-docker/
-
-ADD index.html /usr/apps/hello-docker/index.html
-
-CMD ["http-server", "-s"]
-© 2022 GitHub, Inc.
-Terms
-
+FROM tomcat:8
+# Take the war and copy to webapps of tomcat
+COPY target/*.war /usr/local/tomcat/webapps/dockeransible.war
